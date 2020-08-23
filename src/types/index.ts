@@ -4,5 +4,5 @@ export interface LyricPreview {
 }
 
 export interface LyricDetail extends LyricPreview {
-    lyric: string
+    lyrics: string
 }

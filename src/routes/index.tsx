@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Root } from 'native-base'
+
 import SearchScreen from '../screens/Search'
 import HistoryScreen from '../screens/History'
 import LyricScreen from '../screens/LyricDetail'
@@ -32,6 +34,8 @@ const BottomTabs = () => (
 
 const AppContainer = () => {
   return (
+    //Needed for Toast component to work
+    <Root>
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
@@ -46,6 +50,7 @@ const AppContainer = () => {
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </Root>
   )
 }
 

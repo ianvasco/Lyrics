@@ -6,7 +6,7 @@ export enum Actions {
 }
 interface UpdateHistoryAction {
   type: Actions.UpdateHistory
-  payload: LyricDetail[]
+  payload: LyricDetail
 }
 
 interface ContextProps {
@@ -22,7 +22,7 @@ const StoreContext = createContext({} as ContextProps)
 const reducer = (historyState: LyricDetail[], action: AuthReducerActions) => {
   switch (action.type) {
     case Actions.UpdateHistory:
-      return [...historyState, ...action.payload]
+      return [...historyState, action.payload]
     default:
       return historyState
   }
