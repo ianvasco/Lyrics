@@ -8,6 +8,13 @@ import {NavigationContainer} from '@react-navigation/native'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import {createStackNavigator} from '@react-navigation/stack'
 
+/*
+TODO: React-navigation has an issue which is prompting an error: 
+currentlyFocusedField is deprecated and will be removed in a future release. Use currentlyFocusedInput.
+The above error is supposed to be fixed in https://github.com/react-navigation/react-navigation/commit/35d6b9e3a4a28a59b3b11a67acbf7753d41705ae
+but it seems to be persisting. Check on future updates.
+*/ 
+
 export type RootStackParamList = {
   Home: undefined
   Lyric: undefined

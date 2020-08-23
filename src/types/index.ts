@@ -1,5 +1,5 @@
 export interface LyricPreview {
-    author: string
+    artist: string
     title: string
 }
 
