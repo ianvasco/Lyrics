@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Text, StyleSheet, SafeAreaView, View } from 'react-native';
 import { Input, Form, Item, Container, Content, Label, Button, Spinner, Toast } from 'native-base'
 import CustomHeader from '../../components/Header'
+import LyricPreview from '../../components/LyricPreview';
 
 import ApiService from '../../service/api'
 import {useStore, Actions} from '../../store'
@@ -19,6 +20,8 @@ const Search = () => {
     ApiService.getLyrics(artist, title).then((lyrics: string) => {
       dispatch({type: Actions.UpdateHistory, payload: {artist, title, lyrics}})
       setLoading(false)
+      setArtist('')
+      setTitle('')
     }).catch(() => {
       Toast.show({
         text: 'Could not get Lyrics'
@@ -34,11 +37,11 @@ const Search = () => {
       <Content style={styles.contentContainer}>
         <Form>
           <Item stackedLabel>
-            <Label>Username</Label>
+            <Label>Artist</Label>
             <Input value={artist} onChangeText={setArtist}/>
           </Item>
           <Item stackedLabel last>
-            <Label>Password</Label>
+            <Label>Song title</Label>
             <Input value={title} onChangeText={setTitle} />
           </Item>
         </Form>
@@ -48,7 +51,8 @@ const Search = () => {
         {isLoading && <Spinner size="large" color="black" />}
         {historyState.length > 0 &&
           <View style={{marginTop: 20}}>
-            <Text>holi</Text>
+            <Text style={styles.historyTitle}>Last Searched</Text>
+            <LyricPreview song={historyState[historyState.length - 1]} />
           </View>
         }
       </Content>
@@ -70,6 +74,10 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     margin: 16
+  },
+  historyTitle: {
+    fontSize: 20,
+    fontWeight: '700'
   },
   searchButton: {
     marginTop: 30
