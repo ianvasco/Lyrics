@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Root } from 'native-base'
 
@@ -11,6 +11,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import {createStackNavigator} from '@react-navigation/stack'
 
 import { LyricDetail } from '../types'
+import AsyncStorage from '@react-native-community/async-storage'
+import { useStore, Actions } from '../store'
 
 /*
 TODO: React-navigation has an issue which is prompting an error: 
@@ -35,6 +37,17 @@ const BottomTabs = () => (
 )
 
 const AppContainer = () => {
+
+  const {dispatch} = useStore()
+
+  useEffect(() => {
+    AsyncStorage.getItem('history').then(history => {
+      console.log(JSON.parse(history))
+      if(history)
+      dispatch({type: Actions.InitHistory, payload: JSON.parse(history)})
+    })
+  }, [])
+
   return (
     //Needed for Toast component to work
     <Root>

@@ -7,6 +7,7 @@ import LyricPreview from '../../components/LyricPreview';
 import ApiService from '../../service/api'
 import {useStore, Actions} from '../../store'
 import { StackNavigationProp } from '@react-navigation/stack';
+import AsyncStorage from '@react-native-community/async-storage';
 
 interface SearchProps {
   navigation: StackNavigationProp<any>
@@ -22,13 +23,19 @@ const Search = ({navigation}: SearchProps) => {
 
   const getLyrics = () => {
     setLoading(true)
-    ApiService.getLyrics(artist, title).then((lyrics: string) => {
+    ApiService.getLyrics(artist, title).then(async (lyrics: string) => {
       dispatch({type: Actions.UpdateHistory, payload: {artist, title, lyrics}})
-      navigation.navigate('Lyric', {song: {
+      const song = {
         artist,
         title,
         lyrics
-      }})
+      }
+      navigation.navigate('Lyric', {song})
+        try {
+          await AsyncStorage.setItem('history', JSON.stringify([...historyState, song]))
+        } catch (e) {
+          console.log(e)
+        }
       setLoading(false)
       setArtist('')
       setTitle('')
