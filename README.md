@@ -1,6 +1,6 @@
-# # Lyrics
+## Lyrics
 
-This project has the purpose to show a basic structure for a common React Native Application. It applies good practices as well as Unit test using Jest. It also makes use of React Hooks and the new version of React Navigation (v5).  
+This project has the purpose to show a basic structure for a common React Native Application. It also makes use of React Hooks and the new version of React Navigation (v5).  
 For persistency, Context API is being used over Redux, since it does not need any third party libraries and also makes it much simpler when using simple stores.
 
 ## Getting Started
@@ -38,16 +38,6 @@ Sometimes you may need to reset or clear the React Native packager's cache. To d
 npm start --reset-cache
 # or
 yarn start --reset-cache
-```
-
-## Running the tests
-
-This project is set up to use [jest](https://github.com/facebook/jest) for tests. Create test file besides your component like this: `MyComponent.spec.+(ts|tsx)` in order to be detected by the testing tools.
-
-The tests can be executed by running:
-
-```
-npm test
 ```
 
 ### Dependencies
