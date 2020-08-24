@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
-import { Header, Button, Left, Icon, View, Body, Title, Right } from 'native-base'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Header, Left, View, Body, Title, Right } from 'native-base'
 import { StackNavigationProp } from '@react-navigation/stack';
 
 interface HeaderProps {
@@ -14,16 +14,10 @@ const CustomHeader = ({title, enableBack, navigation}: HeaderProps) => {
     <Header style={styles.header}>
       {enableBack ? (
         <Left style={styles.flex}>
-          <Button
-            testID="header-back-button"
-            transparent
+          <TouchableOpacity
             onPress={() => navigation.goBack()}>
-            <Icon
-              style={{color: 'black', fontSize: 20}}
-              name="chevron-left"
-              type="FontAwesome"
-            />
-          </Button>
+            <Text>Back</Text>
+          </TouchableOpacity>
         </Left>
     ) : (
       <View style={styles.flex} />
