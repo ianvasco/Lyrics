@@ -10,6 +10,8 @@ import {NavigationContainer} from '@react-navigation/native'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import {createStackNavigator} from '@react-navigation/stack'
 
+import { LyricDetail } from '../types'
+
 /*
 TODO: React-navigation has an issue which is prompting an error: 
 currentlyFocusedField is deprecated and will be removed in a future release. Use currentlyFocusedInput.
@@ -19,7 +21,7 @@ but it seems to be persisting. Check on future updates.
 
 export type RootStackParamList = {
   Home: undefined
-  Lyric: undefined
+  Lyric: {song: LyricDetail}
 }
 
 const Tab = createBottomTabNavigator()

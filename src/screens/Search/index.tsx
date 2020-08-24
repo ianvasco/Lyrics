@@ -6,8 +6,13 @@ import LyricPreview from '../../components/LyricPreview';
 
 import ApiService from '../../service/api'
 import {useStore, Actions} from '../../store'
+import { StackNavigationProp } from '@react-navigation/stack';
 
-const Search = () => {
+interface SearchProps {
+  navigation: StackNavigationProp<any>
+}
+
+const Search = ({navigation}: SearchProps) => {
 
   const [artist, setArtist] = useState('')
   const [title, setTitle] = useState('')
@@ -19,6 +24,11 @@ const Search = () => {
     setLoading(true)
     ApiService.getLyrics(artist, title).then((lyrics: string) => {
       dispatch({type: Actions.UpdateHistory, payload: {artist, title, lyrics}})
+      navigation.navigate('Lyric', {song: {
+        artist,
+        title,
+        lyrics
+      }})
       setLoading(false)
       setArtist('')
       setTitle('')
@@ -33,7 +43,7 @@ const Search = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Container>
-      <CustomHeader title="Search Lyric" />
+      <CustomHeader title="Search Lyric" navigation={navigation} />
       <Content style={styles.contentContainer}>
         <Form>
           <Item stackedLabel>
@@ -52,7 +62,7 @@ const Search = () => {
         {historyState.length > 0 &&
           <View style={{marginTop: 20}}>
             <Text style={styles.historyTitle}>Last Searched</Text>
-            <LyricPreview song={historyState[historyState.length - 1]} />
+            <LyricPreview song={historyState[historyState.length - 1]} navigation={navigation} />
           </View>
         }
       </Content>
